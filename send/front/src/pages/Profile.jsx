@@ -162,7 +162,6 @@ const Profile = () => {
               sx={{
                 cursor: "pointer",
                 marginTop: "3rem",
-                color: "blue",
               }}
               onClick={() => navigate("/reset-password")}
             >

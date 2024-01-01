@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  ResetPassword,
   generateDummyUsers,
   getUser,
   login,
@@ -23,5 +24,6 @@ router.post("/createdummy", generateDummyUsers);
 router.put("/update/:userId", upload.single("profilepic"), updateUser);
 
 router.post("/login", login);
+router.post("/reset", ResetPassword);
 
 export default router;

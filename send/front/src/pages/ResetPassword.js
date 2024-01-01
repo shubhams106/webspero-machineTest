@@ -36,14 +36,14 @@ export default function ResetPassword() {
       setIsSubmitting(true);
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5000/api/auth/reset",
         userInfo
       );
+      console.log(response, "response reset passss");
       if (response) {
-        toast.success("login sucessfully");
+        toast.success("password reset sucessfully sucessfully");
         localStorage.setItem("token", response?.data?.token);
         localStorage.setItem("userId", response?.data?._doc?._id);
-        dispatch(setUser(response?.data?._doc));
         navigate("/nearest-users");
       }
     } catch (err) {
@@ -76,7 +76,7 @@ export default function ResetPassword() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Reset Password
           </Typography>
           <Box
             component="form"
@@ -101,7 +101,18 @@ export default function ResetPassword() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label=" old Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <TextField
+              onChange={handleChange}
+              margin="normal"
+              required
+              fullWidth
+              name="newPassword"
+              label="New Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -114,7 +125,9 @@ export default function ResetPassword() {
               sx={{ mt: 3, mb: 2 }}
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Signing In... Please wait" : "Sign In"}
+              {isSubmitting
+                ? "Reset Password... Please wait"
+                : "Reset Password"}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
@@ -122,9 +135,9 @@ export default function ResetPassword() {
                   sx={{
                     cursor: "pointer",
                   }}
-                  onClick={() => navigate("/register")}
+                  onClick={() => navigate("/nearest-users")}
                 >
-                  Don't have an account? Register now
+                  go back to user list
                 </Typography>
               </Grid>
             </Grid>

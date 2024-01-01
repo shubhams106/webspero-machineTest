@@ -9,12 +9,16 @@ import {
 } from "@mui/material";
 import DashboardLayout from "../layouts/DashboardLayout";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function NearestUser() {
   const [nearestUsers, setNearestUsers] = useState({});
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchNearbyUSers();
   }, []);
+
   const fetchNearbyUSers = async () => {
     try {
       const response = await axios.get(
@@ -29,6 +33,14 @@ function NearestUser() {
       console.log(err);
     }
   };
+
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token]);
+
   return (
     <DashboardLayout>
       <Container maxWidth="md">
